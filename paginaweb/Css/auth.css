@@ -10,17 +10,16 @@ header {
     color: white;
     padding: 20px 0;
     text-align: center;
-    min-width: 200px;
 }
 
 .auth-container {
-    max-width: 400px;
-    min-width: 100px;
-    margin: 50px auto;
+    max-width: 380px;
+    height: 440px;
+    margin: 10px auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(116, 19, 19, 0.1);
 }
 
 .auth-container h2 {
@@ -32,7 +31,8 @@ header {
     flex-direction: column;
 }
 
-.auth-container input {
+.auth-container input,
+.auth-container select {
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -49,10 +49,16 @@ header {
 }
 
 .auth-container button:hover {
-    background-color: #0b4668;
+    background-color: #042345;
 }
 
 .auth-container p {
     margin-top: 20px;
     text-align: center;
+}
+
+registerForm {
+    display: flex;
+    flex-direction: column;
+    color: rgba(0, 0, 0, 0.1);
 }

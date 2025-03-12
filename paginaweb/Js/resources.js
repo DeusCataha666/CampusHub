@@ -1,3 +1,26 @@
+import { auth } from './firebase-config.js';
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        console.log('Usuario autenticado:', user.email);
+        // Aquí puedes cargar contenido personalizado
+    } else {
+        // Redirige a la página de login si no hay usuario autenticado
+        window.location.href = 'login.html';
+    }
+});
+
+setPersistence(auth, browserLocalPersistence)
+    .then(() => {
+        console.log('La persistencia de sesión está configurada');
+    })
+    .catch((error) => {
+        console.error('Error configurando la persistencia:', error);
+    });
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const searchButton = document.getElementById('searchButton');
     const queryInput = document.getElementById('queryInput');
@@ -8,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.json())
             .then(data => {
                 const chatMessages = document.getElementById('chatMessages');
-                chatMessages.innerHTML = ''; // Limpiar contenido anterior
+                //chatMessages.innerHTML = ''; // Limpiar contenido anterior
 
                 // Crear elementos HTML para estilizar la respuesta
                 const title = document.createElement('h3');

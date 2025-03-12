@@ -15,11 +15,16 @@
         <div class="auth-container">
             <h2>Registro</h2>
             <form id="registerForm">
-                <input type="text" id="registerName" placeholder="Nombre" required>
-                <input type="text" id="registerLastName" placeholder="Apellidos" required>
+                <input type="text" id="registerNombre" placeholder="Nombre" required>
+                <input type="text" id="registerApellidos" placeholder="Apellidos" required>
                 <input type="email" id="registerEmail" placeholder="Correo electrónico" required>
-                <input type="text" id="registerUsername" placeholder="Nombre de usuario" required>
-                <input type="text" id="registerCareer" placeholder="Carrera" required>
+                <input type="text" id="registerNombreUsuario" placeholder="Nombre de usuario" required>
+                <select id="registerCarrera" required>
+                    <option value="" disabled selected>Selecciona tu carrera</option>
+                    <option value="ING DE SISTEMAS">ING DE SISTEMAS</option>
+                    <option value="ING CIVIL">ING CIVIL</option>
+                    <option value="ING MECANICA">ING MECANICA</option>
+                </select>
                 <input type="password" id="registerPassword" placeholder="Contraseña" required>
                 <button type="submit">Registrarse</button>
             </form>
