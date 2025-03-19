@@ -1,0 +1,64 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #031926;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.auth-container {
+    max-width: 380px;
+    height: 440px auto;
+    margin: 10px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(116, 19, 19, 0.1);
+}
+
+.auth-container h2 {
+    margin-bottom: 20px;
+}
+
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-container input,
+.auth-container select {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.auth-container button {
+    padding: 10px;
+    background-color: #031926;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.auth-container button:hover {
+    background-color: #042345;
+}
+
+.auth-container p {
+    margin-top: 20px;
+    text-align: center;
+}
+
+registerForm {
+    display: flex;
+    flex-direction: column;
+    color: rgba(0, 0, 0, 0.1);
+}

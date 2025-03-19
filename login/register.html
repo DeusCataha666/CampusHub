@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - CampusHub</title>
+    <link rel="stylesheet" href="/Css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>CampusHub <i class="fas fa-graduation-cap"></i></h1>
+    </header>
+    <main>
+        <div class="auth-container">
+            <h2>Registro</h2>
+            <form id="registerForm">
+                <input type="text" id="registerNombre" placeholder="Nombre" required>
+                <input type="text" id="registerApellidos" placeholder="Apellidos" required>
+                <input type="email" id="registerEmail" placeholder="Correo electrónico" required>
+                <input type="text" id="registerNombreUsuario" placeholder="Nombre de usuario" required>
+                <select id="registerCarrera" required>
+                    <option value="" disabled selected>Selecciona tu carrera</option>
+                    <option value="ING DE SISTEMAS">ING DE SISTEMAS</option>
+                    <option value="ING CIVIL">ING CIVIL</option>
+                    <option value="ING MECANICA">ING MECANICA</option>
+                </select>
+                <input type="password" id="registerPassword" placeholder="Contraseña" required>
+                <button type="submit">Registrarse</button>
+            </form>
+            <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+        </div>
+    </main>
+    <script type="module" src="/Js/register.js"></script>    
+</body>
+</html>
