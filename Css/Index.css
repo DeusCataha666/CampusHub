@@ -3,6 +3,9 @@ body {
     background-color: #8BBEB2;
     margin: 0;
     padding: 0;
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
 }
 
 header {

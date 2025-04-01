@@ -1,5 +1,6 @@
-import { auth } from './firebase-config.js';
+import { auth, db } from './firebase-config.js';
 import { onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 // Manejo de autenticación
 onAuthStateChanged(auth, (user) => {
@@ -14,35 +15,138 @@ setPersistence(auth, browserLocalPersistence)
     .then(() => console.log('La persistencia de sesión está configurada'))
     .catch((error) => console.error('Error configurando la persistencia:', error));
 
-// Función para manejar la API de respuestas en el chat
+// Función para obtener la respuesta del chat y guardar en Firebase
 const fetchChatResponse = async () => {
     const queryInput = document.getElementById('queryInput');
     const chatMessages = document.getElementById('chatMessages');
-    const query = queryInput.value.trim();
 
-    if (!query) return alert('Por favor, ingresa un término de búsqueda.');
+    if (!queryInput) {
+        console.error('El elemento queryInput no existe en el DOM.');
+        alert('Error interno: El campo de entrada no está disponible.');
+        return;
+    }
+
+    const query = queryInput.value.trim();
+    if (!query) {
+        alert('Por favor, ingresa un término de búsqueda.');
+        return;
+    }
+
+    const start = performance.now();
 
     try {
-        const response = await fetch(`https://magicloops.dev/api/loop/a0f1f06d-de6c-474c-8ac7-1eb7ae84a880/run?query=${encodeURIComponent(query)}`);
+        const response = await fetch(`https://magicloops.dev/api/loop/a0f1f06d-de6c-474c-8ac7-1eb7ae84a880/run?query=${encodeURIComponent(query)}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Cache-Control': 'no-cache'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la API: ${response.statusText} (${response.status})`);
+        }
+
         const data = await response.json();
+        const end = performance.now();
+        console.log(`Tiempo de respuesta API: ${end - start} ms`);
+
+        chatMessages.innerHTML = ''; // Limpiar mensajes anteriores
 
         if (!data || !data.answer) {
             console.error('Datos inesperados de la API:', data);
-            throw new Error('Respuesta no válida de la API');
+            throw new Error('La API respondió con datos no válidos.');
         }
 
-        const title = document.createElement('h3');
-        title.textContent = 'Respuesta:';
-        
-        const content = document.createElement('p');
-        content.innerHTML = formatResponse(data.answer);
+        const card = document.createElement('div');
+        card.classList.add('card');
 
-        chatMessages.appendChild(title);
-        chatMessages.appendChild(content);
+        const title = document.createElement('h4');
+        title.textContent = `Consulta: ${query}`;
+        const responseText = document.createElement('p');
+        responseText.textContent = `Respuesta: ${data.answer}`;
+
+        card.appendChild(title);
+        card.appendChild(responseText);
+        chatMessages.appendChild(card);
+
+        await addDoc(collection(db, "consultas"), {
+            query: query,
+            answer: data.answer,
+            timestamp: new Date()
+        });
+        console.log("Consulta guardada correctamente en Firebase");
     } catch (error) {
-        console.error('Error al obtener la respuesta del chat:', error);
+        console.error('Error al obtener la respuesta de la API o al guardar en Firebase:', error);
+        alert('Ocurrió un error procesando tu solicitud. Por favor, intenta nuevamente.');
     }
 };
+
+// Función para obtener todas las consultas desde Firebase
+const fetchAllQueries = async () => {
+    const chatMessages = document.getElementById('chatMessages');
+    if (!chatMessages) {
+        console.error('El elemento chatMessages no existe en el DOM.');
+        return;
+    }
+    chatMessages.innerHTML = ''; // Limpiar mensajes anteriores
+
+    try {
+        const querySnapshot = await getDocs(collection(db, "consultas"));
+
+        if (!querySnapshot || querySnapshot.empty) {
+            chatMessages.innerHTML = '<p>No hay consultas guardadas.</p>';
+            return;
+        }
+
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+
+            if (!data || !data.query || !data.answer) {
+                console.error('Estructura de datos inesperada:', data);
+                return;
+            }
+
+            const card = document.createElement('div');
+            card.classList.add('card');
+
+            const title = document.createElement('h5');
+            title.textContent = `Consulta: ${data.query}`;
+            const responseText = document.createElement('p');
+            responseText.textContent = `Respuesta: ${data.answer}`;
+
+            card.appendChild(title);
+            card.appendChild(responseText);
+            chatMessages.appendChild(card);
+        });
+    } catch (error) {
+        console.error('Error al obtener las consultas de Firebase:', error);
+        chatMessages.innerHTML = '<p>Ocurrió un error al recuperar las consultas.</p>';
+    }
+};
+
+// Inicialización de eventos en el DOM
+document.addEventListener('DOMContentLoaded', () => {
+    const searchButton = document.getElementById('searchButton');
+    const queryInput = document.getElementById('queryInput');
+    const showQueriesButton = document.getElementById('showQueries');
+
+    if (searchButton) {
+        searchButton.addEventListener('click', fetchChatResponse);
+    }
+
+    if (queryInput) {
+        queryInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                fetchChatResponse();
+            }
+        });
+    }
+
+    if (showQueriesButton) {
+        showQueriesButton.addEventListener('click', fetchAllQueries);
+    }
+});
 
 // Función para mostrar info-boxes con datos de la API
 const fetchInfoBoxes = async (query) => {
@@ -50,10 +154,9 @@ const fetchInfoBoxes = async (query) => {
     infoBoxesContainer.innerHTML = ''; // Limpiar resultados anteriores
 
     try {
-        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&key=AIzaSyDwWto7bTPh5FIQzOCHgankbfaF9Fe777I`);
+        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&key=AIzaSyD7uH83n_xvtgcFQIhTyyXi7ZGtMeOkMwc`);
         const data = await response.json();
 
-        console.log("Respuesta de la API para info-boxes:", JSON.stringify(data, null, 2)); // Depuración
 
         if (data.items && Array.isArray(data.items)) {
             // Tomar solo los primeros 2 resultados
@@ -71,7 +174,7 @@ const fetchInfoBoxes = async (query) => {
                     infoBox.classList.add('info-box');
                     infoBox.innerHTML = `
                         <img src="${thumbnail}" alt="${title}">
-                        <h3>${title}</h3>
+                        <h5>${title}</h5>
                         <a href="${videoUrl}" target="_blank">Ver en YouTube</a>
                     `;
 
@@ -79,7 +182,6 @@ const fetchInfoBoxes = async (query) => {
                 }
             });
         } else {
-            console.error('Formato inesperado de la API:', data);
             infoBoxesContainer.innerHTML = '<p>No se encontraron resultados.</p>';
         }
     } catch (error) {
@@ -114,7 +216,7 @@ const fetchResources = () => {
                     infoBox.appendChild(link);
                 } else if (resource.type === "article") {
                     // Si es un artículo, mostrar título y enlace
-                    const title = document.createElement('h3');
+                    const title = document.createElement('h5');
                     title.textContent = resource.title;
 
                     const description = document.createElement('p');

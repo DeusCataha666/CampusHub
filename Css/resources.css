@@ -17,21 +17,21 @@ header {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
 }
 
 .info-boxes {
-    max-width: 55%;
-    padding: 16px;
+    width: 55%;
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Dos columnas */
-    gap: 8px;
+    gap: 16px;
 }
 
 .info-box {
     border: 1px solid #ccc;
-    padding: 8px;
+    padding: 16px;
     border-radius: 8px;
-    margin: 4px;
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -58,7 +58,7 @@ header {
 }
 
 .chat-container {
-    width: 45%; 
+    width: 40%;
     max-height: 80vh;
     height: auto;
     padding: 16px;
@@ -68,7 +68,7 @@ header {
 }
 
 .chat-box {
-    width: 90%;
+    width: 100%;
     max-width: 600px;
     border: 1px solid #ccc;
     padding: 15px;
@@ -84,6 +84,7 @@ header {
     padding: 10px;
     text-align: center;
     margin-bottom: 16px;
+    font-size: 1.2em;
 }
 
 .chat-messages {
@@ -94,33 +95,6 @@ header {
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
-}
-
-.resource-item {
-    border: 1px solid #ccc;
-    padding: 16px;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-}
-
-.resource-title {
-    font-size: 1.5em;
-    margin-bottom: 8px;
-}
-
-.resource-description {
-    font-size: 1em;
-    margin-bottom: 8px;
-}
-
-.resource-link {
-    color: #007BFF;
-    text-decoration: none;
-}
-
-.resource-link:hover {
-    text-decoration: underline;
 }
 
 .chat-input {
@@ -158,53 +132,104 @@ footer {
     padding: 10px 0;
 }
 
-/* Media query para pantallas pequeñas */
+/* Media query para pantallas medianas */
 @media (max-width: 768px) {
     .content-container {
-        flex-direction: column;
-        margin-bottom: 5px;
-    }
-
-    .chat-container {
-        width: 100%;
-        order: 1;
-    }
-
-    .chat-header {
-        font-size: 22px;
-    }
-
-    .chat-input {
-        display: flex;
-        font-size: 14px;
-        width: 100%;
-    }
-
-    .chat-messages {
-        font-size: 14px;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
     }
 
     .info-boxes {
         width: 100%;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 16px;
-        order: 2;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ajuste dinámico */
     }
-}
 
-/* Media query para pantallas muy pequeñas */
-@media (max-width: 300px) {
+    .chat-container {
+        width: 100%;
+        max-height: 90vh;
+        padding: 8px;
+        order: -1;
+    }
+
+    .chat-box {
+        max-width: 100%;
+        height: 90%;
+        padding: 10px;
+    }
+
+    .chat-header {
+        font-size: 1em;
+        padding: 8px;
+    }
+
+    .chat-messages {
+        height: 150px;
+        font-size: 0.9em;
+    }
+
     .chat-input {
-        flex-direction: column;
+        flex-direction: row; /* Cambiar a diseño en columna */
+        gap: 8px;
     }
 
     .chat-input input {
-        margin-bottom: 8px;
+        width: 50%; /* Asegurar que el input ocupe todo el ancho */
     }
 
-    .chat-input #searchButton {
+    #searchButton{
+        width: 30%; /* Asegurar que el botón ocupe todo el ancho */
+    }
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 480px) {
+    .info-boxes {
+        grid-template-columns: 1fr; /* Una columna */
+    }
+
+    .chat-container {
         width: 100%;
+        padding: 8px;
+    }
+
+    .chat-box {
+        max-width: 100%;
+        padding: 8px;
+    }
+
+    .chat-header {
+        font-size: 0.9em;
+        padding: 6px;
+    }
+
+    .chat-messages {
+        height: 200px;
+        font-size: 0.8em;
+    }
+
+    .chat-input {
+        flex-direction: row; /* Mantener diseño en columna */
+        gap: 8px;
+    }
+
+    #showQueries{
+        padding: 2%;
+        width: 40px;
+        text-align: center;
+
+    }
+
+    .chat-input input {
+        width: 50%; /* Asegurar que el input ocupe todo el ancho */
+    }
+
+    #searchButton  {
+        width: 30%; /* Asegurar que el botón ocupe todo el ancho */
+    }
+
+    footer {
+        font-size: 12px;
     }
 }
 
