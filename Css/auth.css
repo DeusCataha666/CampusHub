@@ -1,8 +1,11 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
+    background-color: #8BBEB2;
     margin: 0;
     padding: 0;
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
 }
 
 header {
@@ -12,10 +15,21 @@ header {
     text-align: center;
 }
 
+main {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/Imagenes/bagraund.webp') no-repeat center center;
+    background-size: cover;
+    margin: 1px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    min-height: 70%;
+}
+
 .auth-container {
     max-width: 380px;
-    height: 440px auto;
-    margin: 10px auto;
+    height: auto;
+    margin: 8px auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -27,8 +41,10 @@ header {
 }
 
 .auth-container form {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 3;
 }
 
 .auth-container input,

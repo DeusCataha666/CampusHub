@@ -1,15 +1,72 @@
-/* Estilos generales */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial';
+    background-color: #8BBEB2;
     margin: 0;
     padding: 0;
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
 }
 
 header {
     background-color: #031926;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     color: white;
-    padding: 20px 0;
+    padding: 6px;
     text-align: center;
+}
+
+header h1 {
+    font-size: 30px;
+    margin: 3px;
+}   
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav button {
+    background-color: #411306;
+    height: 30px;
+    width: 80px;
+    margin: 5px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+nav button:hover {
+    background-color: #76321f;
+    transition: 0.5s ease;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
 .content-container {
@@ -17,8 +74,8 @@ header {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 16px;
-    padding: 16px;
+    align-items: center;
+    height: 100%;
 }
 
 .info-boxes {
@@ -59,17 +116,18 @@ header {
 
 .chat-container {
     width: 40%;
-    max-height: 80vh;
+    max-height: 100%;
     height: auto;
-    padding: 16px;
+    padding: 10px;
     display: flex;
     justify-content: center;
-    margin-top: 5px;
+    margin-top: 1px;
 }
 
 .chat-box {
     width: 100%;
     max-width: 600px;
+    height: auto;
     border: 1px solid #ccc;
     padding: 15px;
     border-radius: 8px;
@@ -81,16 +139,16 @@ header {
 .chat-header {
     background-color: #031926;
     color: white;
-    padding: 10px;
+    padding: 1px;
     text-align: center;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     font-size: 1.2em;
 }
 
 .chat-messages {
     height: 300px;
     overflow-y: auto;
-    padding: 8px;
+    /* padding: px; */
     margin-bottom: 16px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -99,8 +157,11 @@ header {
 
 .chat-input {
     display: flex;
+    flex-direction: row; /* Cambiar a diseño en columna */
+    justify-content: center;
+    align-items: center;
     gap: 8px;
-    width: 100%;
+    width: auto;
     border-top: 1px solid #ccc;
 }
 
@@ -129,8 +190,31 @@ footer {
     background-color: #031926;
     color: white;
     text-align: center;
-    padding: 10px 0;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;    
 }
+
+footer p {
+    margin-top: 8px;
+}
+/* chambonada pero es lo unico que se me ocurre para que no se vea tan feo el .chat-box cuando se minimiza la pantalla */
+@media (max-width: 1007px) {
+
+    
+
+    .info-boxes {
+        width: 60%;
+        height: auto;
+        padding: 8px;
+    }
+
+    .chat-messages {
+        height: 215px;
+    }
+
+}
+
 
 /* Media query para pantallas medianas */
 @media (max-width: 768px) {
@@ -142,7 +226,8 @@ footer {
 
     .info-boxes {
         width: 100%;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ajuste dinámico */
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajuste dinámico */
+        padding: 8px;
     }
 
     .chat-container {
@@ -182,10 +267,12 @@ footer {
     }
 }
 
+
 /* Media query para pantallas pequeñas */
-@media (max-width: 480px) {
+@media (max-width: 550px) {
     .info-boxes {
         grid-template-columns: 1fr; /* Una columna */
+        padding: 8px;
     }
 
     .chat-container {
@@ -204,7 +291,7 @@ footer {
     }
 
     .chat-messages {
-        height: 200px;
+        height: 250px;
         font-size: 0.8em;
     }
 

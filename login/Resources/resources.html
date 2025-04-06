@@ -12,30 +12,23 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">CAMPUSHUB <i class="fas fa-graduation-cap"></i></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/Resources/resources.html">Resources</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login/Resources/Blog/blog.html">Blog</a>
-                        </li>
-                        <li class="nav-item">   
-                            <a class="nav-link" href="/login/Resources/Foro/foro.html">Foro</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <h1>CampusHub <i class="fas fa-graduation-cap"></i></h1>
+        <nav>
+            <ul class="nav-list">
+                <ul>
+                    <li>
+                        <button><a class="nav-link active" aria-current="page" href="/Resources/resources.html">Resources</a></button>
+                    </li>
+                    <li>
+                        <button><a class="nav-link" href="/login/Resources/Blog/blog.html">Blog</a></button>
+                    </li>
+                    <li>   
+                       <button><a class="nav-link" href="/login/Resources/Foro/foro.html">Foro</a></button> 
+                    </li>
+                </ul>
+            </ul>
         </nav>
-    </header>
+      </header>
     <main>
         <div class="content-container">
             <div class="info-boxes">
@@ -49,10 +42,10 @@
                     <div class="chat-messages" id="chatMessages">
                         <!-- Mensajes del chat aparecerán aquí -->
                     </div>
-                    <div class="chat-input">
+                    <div class="chat-input" style="border: none;">
                         <button id="showQueries" ><i class="fas fa-history"></i></button>
                         <input type="text" id="queryInput" placeholder="Escribe tu búsqueda">
-                        <button id="searchButton"><i class="fas fa-search"></i> Buscar</button>
+                        <button id="searchButton"><i class="fas fa-search"></i></button>
                     </div>
                 </div>
             </div>

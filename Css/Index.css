@@ -1,5 +1,5 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial';
     background-color: #8BBEB2;
     margin: 0;
     padding: 0;
@@ -9,7 +9,7 @@ body {
 }
 
 header {
-    background-color: #0D1821;
+    background-color: #031926;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -21,12 +21,13 @@ header {
 
 h1 {
     font-size: 30px;
-    margin: 0;
+    margin: 3px;
 }
 
 nav {
     display: flex;
-    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 nav button {
@@ -53,14 +54,22 @@ nav button:hover {
     border-radius: 5px;
 }
 
+main {
+    display: grid;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    padding: 0;  
+}
+
 section {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/Imagenes/bagraund.webp') no-repeat center center;
     background-size: cover;
     color: white;
     margin: 5px;
     text-align: center;
-    height: 75vh;
-    padding: 100px 0;
+    height: auto;
+    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -100,11 +109,12 @@ section {
 }
 
 footer {
-    background-color: #0D1821;
+    background-color: #031926;
     color: white;
     text-align: center;
-    padding: 10px 0;
     font-size: 15px;
+    display: flex;
+    justify-content: center;    
 }
 
 footer p {
@@ -112,7 +122,7 @@ footer p {
 }
 
 /* Media query para pantallas medianas */
-@media (max-width: 438px) {
+@media (max-width: 550px) {
     header {
         flex-direction: column;
         padding: 10px 0;
