@@ -12,36 +12,31 @@
 
 <body>
     <header>
-        <h1>CampusHub <i class="fas fa-graduation-cap"></i></h1>
-        <nav>
-            <ul class="nav-list">
-                <ul>
-                    <li>
-                        <button><a class="nav-link active" aria-current="page" href="/Resources/resources.html">Resources</a></button>
-                    </li>
-                    <li>
-                        <button><a class="nav-link" href="/login/Resources/Blog/blog.html">Blog</a></button>
-                    </li>
-                    <li>   
-                       <button><a class="nav-link" href="/login/Resources/Foro/foro.html">Foro</a></button> 
-                    </li>
-                </ul>
-            </ul>
+        <h1>CAMPUSHUB <i class="fas fa-graduation-cap"></i></h1>
+        <button id="menu-button" class="menu-button">
+          <i class="fas fa-bars"></i>
+        </button>
+    
+        <nav class="sidebar" id="sidebar">
+          <button id="close-sidebar" class="close-sidebar">×</button>
+          <ul>
+            <li><a href="/login/register.html">Unete a Nosotros</a></li>
+            <li><a href="#contact">Contacto</a></li>
+            <li><a href="#about">Acerca de Nosotros</a></li>
+          </ul>
         </nav>
+        <div id="overlay"></div>
       </header>
     <main>
-        <div class="content-container">
-            <div class="info-boxes">
-                <!-- Las info-boxes se llenarán dinámicamente -->
-            </div>
+        <section class="content-container">
             <div class="chat-container">
                 <div class="chat-box">
                     <div class="chat-header">
                         <h5>Consulta sobre algun tema <i class="fas fa-comments"></i></h5>
                     </div>
-                    <div class="chat-messages" id="chatMessages">
+                    <article class="chat-messages" id="chatMessages">
                         <!-- Mensajes del chat aparecerán aquí -->
-                    </div>
+                    </article>
                     <div class="chat-input" style="border: none;">
                         <button id="showQueries" ><i class="fas fa-history"></i></button>
                         <input type="text" id="queryInput" placeholder="Escribe tu búsqueda">
@@ -49,7 +44,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="info-boxes">
+                <!-- Las info-boxes se llenarán dinámicamente -->
+            </div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2025 CampusHub. Todos los derechos reservados.</p>

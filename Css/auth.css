@@ -1,80 +1,113 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #8BBEB2;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    min-height: 100dvh;
-    grid-template-rows: auto 1fr auto;
+:root {
+  --text-color: #f1f1f1;
+  --accent-color: #021b1d;
+
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0A3A40;
+  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+}
+
+/* Estilos para el header */
 header {
-    background-color: #031926;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--accent-color);
+  padding: 2rem 3rem;
 }
 
 main {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/Imagenes/bagraund.webp') no-repeat center center;
-    background-size: cover;
-    margin: 1px;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    min-height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+  margin-top: 10px;
 }
 
+
 .auth-container {
-    max-width: 380px;
-    height: auto;
-    margin: 8px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(116, 19, 19, 0.1);
+  max-width: 380px;
+  height: auto;
+  margin: 8px auto;
+  padding: 20px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 50)),
+    url("/Imagenes/bagraund.webp") no-repeat center center;
+  background-size: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(116, 19, 19, 0.1);
+  position: relative;
+}
+
+.auth-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+   /* Fondo blanco con opacidad */
+  border-radius: 8px; /* Mantener bordes redondeados */
+  z-index: -5; /* Colocar detrás del contenido */
+  opacity: 90%;
 }
 
 .auth-container h2 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .auth-container form {
-    display: grid;
-    grid-template-columns: 1fr;
-    height: auto;
-    gap: 3;
+  display: grid;
+  grid-template-columns: 1fr;
+  height: auto;
+  gap: 3;
 }
 
 .auth-container input,
 .auth-container select {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
 }
 
 .auth-container button {
-    padding: 10px;
-    background-color: #031926;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+  padding: 10px;
+  background-color: #107361;
+  color: #fff;
+
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .auth-container button:hover {
-    background-color: #042345;
+  background-color: #182020;
+  transition-delay: 200ms;
 }
 
 .auth-container p {
-    margin-top: 20px;
-    text-align: center;
+  margin-top: 20px;
+  text-align: center;
 }
 
 registerForm {
-    display: flex;
-    flex-direction: column;
-    color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  color: rgba(0, 0, 0, 0.1);
 }

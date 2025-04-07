@@ -1,0 +1,304 @@
+:root {
+  --bg-color: #0A3A40;
+  --text-color: #ffffff;
+  --accent-color: #021b1d;
+  --highlight: #0a272a;
+  --highlight2: #182020;
+  --primary: #107361;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilos para el header */
+header {
+  display: flex;
+  justify-content: space-between; /* Espaciado entre los elementos */
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--accent-color);
+  border-bottom: 1px solid var(--highlight);
+  position: relative; /* Para posicionar el botón y el slider */
+}
+
+/* Centrar el h1 */
+header h1 {
+  flex: 1; /* Ocupa el espacio restante */
+  text-align: center; /* Centra el texto */
+  font-size: 1.8rem;
+  color: white;
+}
+
+/* Estilos para el botón del menú */
+.menu-button {
+  background-color: #031926; /* Color de fondo */
+  color: white; /* Color del ícono */
+  border: none; /* Sin bordes */
+  border-radius: 50%; /* Forma circular */
+  width: 50px; /* Ancho del botón */
+  height: 50px; /* Alto del botón */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; /* Cambiar el cursor al pasar por encima */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones */
+  position: relative; /* Mantener su posición relativa */
+  z-index: 1001; /* Asegurar que esté por encima del slider */
+}
+
+.menu-button:hover {
+  background-color: #8BBEB2; /* Color de fondo al pasar el mouse */
+  color: #031926; /* Cambiar el color del ícono */
+  transform: scale(1.1); /* Efecto de zoom */
+}
+
+.menu-button:active {
+  transform: scale(0.95); /* Efecto al hacer clic */
+}
+
+/* Estilos para el botón de cerrar el menú lateral */
+.close-sidebar {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+close-sidebar:hover {
+  color: #8BBEB2; /* Cambiar color al pasar el mouse */
+}
+
+/* Ajustar el slider */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -250px; /* Cambiar al lado derecho */
+  width: 250px;
+  height: 100%;
+  background-color: var(--accent-color);
+  padding: 2rem 1rem;
+  transition: right 0.3s ease; /* Animación al abrir/cerrar */
+  z-index: 1001;
+}
+
+.sidebar.active {
+  right: 0; /* Mostrar el slider */
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  margin-bottom: 1rem;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: none;
+}
+
+#overlay.active {
+  display: block;
+}
+
+main {
+  padding: 2rem;
+}
+
+section {
+  margin-bottom: 5rem;
+}
+
+#hero {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  border-color: beige;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0 8px 8px 0;
+}
+
+#hero img {
+  width: 538px;
+  height: 588px;
+  object-fit: cover;
+  margin: 3px;
+}
+
+.section-title {
+  font-size: 1.7rem;
+  padding-left: 0.5rem;
+}
+
+article p {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  text-align: justify;
+  line-height: 1.3;
+  margin: 3rem 1rem 3rem 0;
+}
+
+.button {
+  background-color: var(--primary);
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.button:hover {
+  background-color: var(--highlight2);
+  transition-delay: 200ms;
+}
+
+.button a {
+  text-decoration: none;
+  color: inherit; /* Hereda el color del botón */
+  display: block; /* Asegura que el enlace ocupe todo el botón */
+}
+
+#projects-services {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#projects-services .section-title {
+  text-align: center;
+}
+
+#projects-services #parrafo {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  line-height: 1.3;
+}
+
+.projects .card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.projects .card {
+  color: var(--text-color);
+  height: auto;
+  border: 1px solid var(--highlight);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  padding: 1rem;
+  background-color: var(--highlight);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  max-height: 500px;
+  transition: transform 0.3s ease;
+}
+
+.projects .card h3 {
+  margin: 15px 0 10px 0;
+  font-size: 1.3rem;
+}
+
+.projects .card p {
+  text-align: justify;
+  font-size: 1rem;
+  color: var(--text-color);
+  line-height: 1.3;
+  margin: 0 0 1rem 0;
+}
+
+.projects .card .pgr {
+  justify-content: space-between;
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 30px;
+}
+
+.projects .card .button {
+  margin-top: auto;
+  background-color: var(--primary);
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.projects .card .button:hover {
+  background-color: var(--highlight2);
+  transition-delay: 200ms;
+}
+
+.projects .card a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.projects, .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.projects .card, .gallery img {
+  background-color: var(--highlight);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.gallery img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--accent-color);
+  border-top: 1px solid var(--highlight);
+}
+
+a {
+  color: var(--text-color);
+}
+

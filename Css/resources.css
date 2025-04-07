@@ -1,322 +1,462 @@
+:root {
+  --bg-color: #0a3a40;
+  --text-color: #ffffff;
+  --accent-color: #021b1d;
+  --highlight: #0a272a;
+  --highlight2: #182020;
+  --primary: #107361;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Asegurar que el body ocupe toda la altura de la pantalla */
 body {
-    font-family: 'Arial';
-    background-color: #8BBEB2;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    min-height: 100dvh;
-    grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Altura mínima igual a la altura de la ventana */
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* El main debe ocupar el espacio restante entre el header y el footer */
+main {
+    flex: 1; /* Ocupa el espacio restante */    
+    display: flex;
+    flex-direction: column; /* Cambiar a diseño en columna */
+    justify-content: center; /* Centrar contenido verticalmente */
+    align-items: center; /* Centrar contenido horizontalmente */
+    width: 100%;
+    overflow: hidden; /* Evitar el desbordamiento */
+    position: relative; /* Para el overlay */
+    z-index: 0; /* Asegura que el main esté detrás del header y footer */
+    padding: 0 1rem; /* Espacio lateral */
+    background-color: var(--bg-color); /* Color de fondo */
+
+}
+
+/* Estilos para el header */
 header {
-    background-color: #031926;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    padding: 6px;
-    text-align: center;
+  display: flex;
+  justify-content: space-between; /* Espaciado entre los elementos */
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--accent-color);
+  border-bottom: 1px solid var(--highlight);
+  position: relative; /* Para posicionar el botón y el slider */
 }
 
+/* Centrar el h1 */
 header h1 {
-    font-size: 30px;
-    margin: 3px;
-}   
-
-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  flex: 1; /* Ocupa el espacio restante */
+  text-align: center; /* Centra el texto */
+  font-size: 1.8rem;
+  color: white;
 }
 
-ul{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 2px;
+/* Estilos para el botón del menú */
+.menu-button {
+  background-color: #031926; /* Color de fondo */
+  color: white; /* Color del ícono */
+  border: none; /* Sin bordes */
+  border-radius: 50%; /* Forma circular */
+  width: 50px; /* Ancho del botón */
+  height: 50px; /* Alto del botón */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; /* Cambiar el cursor al pasar por encima */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones */
+  position: relative; /* Mantener su posición relativa */
+  z-index: 1001; /* Asegurar que esté por encima del slider */
 }
 
-li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.menu-button:hover {
+  background-color: #8bbeb2; /* Color de fondo al pasar el mouse */
+  color: #031926; /* Cambiar el color del ícono */
+  transform: scale(1.1); /* Efecto de zoom */
 }
 
-nav button {
-    background-color: #411306;
-    height: 30px;
-    width: 80px;
-    margin: 5px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.menu-button:active {
+  transform: scale(0.95); /* Efecto al hacer clic */
 }
 
-nav a {
-    text-decoration: none;
-    color: white;
+/* Estilos para el botón de cerrar el menú lateral */
+.close-sidebar {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-nav button:hover {
-    background-color: #76321f;
-    transition: 0.5s ease;
-    padding: 5px 10px;
-    border-radius: 5px;
+close-sidebar:hover {
+  color: #8bbeb2; /* Cambiar color al pasar el mouse */
 }
 
+/* Ajustar el slider */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -250px; /* Cambiar al lado derecho */
+  width: 250px;
+  height: 100%;
+  background-color: var(--accent-color);
+  padding: 2rem 1rem;
+  transition: right 0.3s ease; /* Animación al abrir/cerrar */
+  z-index: 1001;
+}
+
+.sidebar.active {
+  right: 0; /* Mostrar el slider */
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  margin-bottom: 1rem;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
+}
+
+#overlay.active {
+  display: block;
+}
+
+/* Estilos para content-container */
 .content-container {
-    background-color: #8BBEB2;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-    height: 100%;
+  display: flex;
+  flex-direction: column; /* Mantener diseño en columna */
+  gap: 1rem; /* Espaciado entre los elementos */
+  align-items: center; /* Centrar los elementos horizontalmente */
+  padding: 1rem;
 }
 
+/* General: Asegurar que los contenedores sean flexibles */
 .info-boxes {
-    width: 55%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
-    gap: 16px;
+  width: 96%; /* Ocupa el 96% del ancho disponible */
+  max-width: 1200px; /* Ancho máximo */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajuste dinámico de columnas */
+  gap: 1rem;
+  padding: 1rem;
+  background-color: transparent;
+  border: transparent;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para info-boxes */
+.info-boxes {
+  width: 96%; /* Ocupa el 96% del ancho disponible */
+  max-width: 1200px; /* Ancho máximo */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajuste dinámico de columnas */
+  gap: 1rem;
+  padding: 1rem;
+  background-color: transparent;
+  border: transparent;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .info-box {
-    border: 1px solid #ccc;
-    padding: 16px;
-    border-radius: 8px;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--highlight);
+  color: var(--text-color);
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--highlight);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .info-box img {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 8px;
-    margin-bottom: 8px;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 8px;
+  margin-bottom: 8px;
 }
 
 .info-box a {
-    color: #007BFF;
-    text-decoration: none;
-    font-weight: bold;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .info-box a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
+/* Estilos para chat-container */
 .chat-container {
-    width: 40%;
-    max-height: 100%;
-    height: auto;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    margin-top: 1px;
+  width: 96%; /* Ocupa el 96% del ancho disponible */
+  max-width: 1200px; /* Ancho máximo */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 400px; /* Aumentar la altura mínima */
 }
 
 .chat-box {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    border: 1px solid #ccc;
-    padding: 15px;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--highlight);
+  border-radius: 8px;
+  background-color: var(--highlight);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .chat-header {
-    background-color: #031926;
-    color: white;
-    padding: 1px;
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 1.2em;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border-radius: 6px;
 }
 
 .chat-messages {
-    height: 300px;
-    overflow-y: auto;
-    /* padding: px; */
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+  flex: 1;
+  min-height: 300px;
+  max-height: 70vh; /* Altura máxima relativa a la ventana */
+  overflow-y: auto;
+  padding: 1rem;
+  border: 1px solid var(--highlight);
+  border-radius: 8px;
+  background-color: #f1f1f1;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 8px; /* Ancho del scrollbar */
+}
+
+.chat-messages h4 {
+  margin: 0;
+  padding: 4px;
+  justify-content: center;
+}
+
+.chat-messages p {
+  margin: 0;
+  padding: 4px;
+  justify-content: justify;
 }
 
 .chat-input {
-    display: flex;
-    flex-direction: row; /* Cambiar a diseño en columna */
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    width: auto;
-    border-top: 1px solid #ccc;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  padding: 0.5rem;
 }
 
 .chat-input input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
 .chat-input button {
-    padding: 8px 16px;
-    background-color: #031926;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+  padding: 0.5rem 1rem;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .chat-input button:hover {
-    background-color: #8BBEB2;
-    color: #000;
+  background-color: #8bbeb2;
+  color: #000;
 }
 
+/* Estilos para el footer */
 footer {
-    background-color: #031926;
-    color: white;
-    text-align: center;
-    font-size: 16px;
-    display: flex;
-    justify-content: center;    
+  text-align: center;
+  padding: 0.5rem;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border-top: 1px solid var(--highlight);
+  font-size: 0.9rem;
+  position: relative; /* Asegura que no se superponga */
 }
 
-footer p {
-    margin-top: 8px;
-}
-/* chambonada pero es lo unico que se me ocurre para que no se vea tan feo el .chat-box cuando se minimiza la pantalla */
-@media (max-width: 1007px) {
-
-    
-
-    .info-boxes {
-        width: 60%;
-        height: auto;
-        padding: 8px;
-    }
-
-    .chat-messages {
-        height: 215px;
-    }
-
+a {
+  color: var(--text-color);
 }
 
-
-/* Media query para pantallas medianas */
+/* Media queries para tabletas (pantallas entre 481px y 768px) */
 @media (max-width: 768px) {
-    .content-container {
-        flex-direction: row;
-        align-items: center;
-        gap: 16px;
-    }
+  .content-container {
+    flex-direction: column; /* Mantener diseño en columna */
+    gap: 1rem; /* Espaciado entre elementos */
+    padding: 1rem;
+  }
 
-    .info-boxes {
-        width: 100%;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajuste dinámico */
-        padding: 8px;
-    }
+  .chat-container {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 1rem;
+    min-height: 350px; /* Altura mínima ajustada */
+  }
 
-    .chat-container {
-        width: 100%;
-        max-height: 90vh;
-        padding: 8px;
-        order: -1;
-    }
+  .info-boxes {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajuste dinámico de columnas */
+    gap: 0.5rem; /* Reducir espaciado */
+    padding: 1rem;
+  }
 
-    .chat-box {
-        max-width: 100%;
-        height: 90%;
-        padding: 10px;
-    }
+  .chat-header {
+    font-size: 1rem; /* Reducir tamaño del texto */
+    padding: 0.5rem;
+  }
 
-    .chat-header {
-        font-size: 1em;
-        padding: 8px;
-    }
+  .chat-messages {
+    max-height: 40vh; /* Ajustar altura máxima */
+    font-size: 0.9rem; /* Reducir tamaño del texto */
+  }
 
-    .chat-messages {
-        height: 150px;
-        font-size: 0.9em;
-    }
+  .chat-input {
+    flex-direction: column; /* Cambiar a diseño en columna */
+    gap: 0.5rem;
+  }
 
-    .chat-input {
-        flex-direction: row; /* Cambiar a diseño en columna */
-        gap: 8px;
-    }
+  .chat-input input {
+    width: 100%; /* Asegurar que el input ocupe todo el ancho */
+  }
 
-    .chat-input input {
-        width: 50%; /* Asegurar que el input ocupe todo el ancho */
-    }
-
-    #searchButton{
-        width: 30%; /* Asegurar que el botón ocupe todo el ancho */
-    }
+  .chat-input button {
+    width: 100%; /* Botón ocupa todo el ancho */
+  }
 }
 
+/* Media queries para móviles (pantallas de 480px o menos) */
+@media (max-width: 480px) {
+  .content-container {
+    gap: 0.5rem; /* Reducir espaciado */
+    padding: 0.5rem;
+  }
 
-/* Media query para pantallas pequeñas */
-@media (max-width: 550px) {
-    .info-boxes {
-        grid-template-columns: 1fr; /* Una columna */
-        padding: 8px;
-    }
+  .chat-container {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 0.5rem;
+    min-height: 300px; /* Reducir altura mínima */
+  }
 
-    .chat-container {
-        width: 100%;
-        padding: 8px;
-    }
+  .info-boxes {
+    grid-template-columns: 1fr; /* Una columna */
+    gap: 0.5rem; /* Reducir espaciado */
+    padding: 0.5rem;
+  }
 
-    .chat-box {
-        max-width: 100%;
-        padding: 8px;
-    }
+  .chat-header {
+    font-size: 0.9rem; /* Reducir tamaño del texto */
+    padding: 0.5rem;
+  }
 
-    .chat-header {
-        font-size: 0.9em;
-        padding: 6px;
-    }
+  .chat-messages {
+    max-height: 35vh; /* Ajustar altura máxima */
+    font-size: 0.8rem; /* Reducir tamaño del texto */
+  }
 
-    .chat-messages {
-        height: 250px;
-        font-size: 0.8em;
-    }
+  .chat-input {
+    flex-direction: row; /* Mantener diseño en columna */
+    width: 100%; /* Asegurar que el input ocupe todo el ancho */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between; /* Espaciado entre los elementos */
+    gap: 0.5rem;
+  }
 
-    .chat-input {
-        flex-direction: row; /* Mantener diseño en columna */
-        gap: 8px;
-    }
+  .chat-input input {
+    width: 70%; /* Asegurar que el input ocupe todo el ancho */
+  }
 
-    #showQueries{
-        padding: 2%;
-        width: 40px;
-        text-align: center;
+  .chat-input button {
+    width: 21%; /* Botón ocupa todo el ancho */
+    margin: 0; /* Sin margen */
+  }
 
-    }
-
-    .chat-input input {
-        width: 50%; /* Asegurar que el input ocupe todo el ancho */
-    }
-
-    #searchButton  {
-        width: 30%; /* Asegurar que el botón ocupe todo el ancho */
-    }
-
-    footer {
-        font-size: 12px;
-    }
+  footer {
+    font-size: 0.8rem; /* Reducir tamaño del texto */
+  }
 }
 
+/* Media queries para pantallas muy pequeñas (menores a 360px) */
+@media (max-width: 360px) {
+  .content-container {
+    gap: 0.5rem; /* Reducir espaciado */
+    padding: 0.5rem;
+  }
+
+  .chat-container {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 0.5rem;
+    min-height: 250px; /* Reducir altura mínima */
+  }
+
+  .info-boxes {
+    grid-template-columns: 1fr; /* Una columna */
+    gap: 0.5rem; /* Reducir espaciado */
+    padding: 0.5rem;
+  }
+
+  .chat-header {
+    font-size: 0.8rem; /* Reducir tamaño del texto */
+    padding: 0.5rem;
+  }
+
+  .chat-messages {
+    max-height: 30vh; /* Ajustar altura máxima */
+    font-size: 0.7rem; /* Reducir tamaño del texto */
+  }
+
+  .chat-input {
+    flex-direction: column; /* Mantener diseño en columna */
+    gap: 0.5rem;
+  }
+
+  .chat-input input {
+    width: 100%; /* Asegurar que el input ocupe todo el ancho */
+  }
+
+  .chat-input button {
+    width: 100%; /* Botón ocupa todo el ancho */
+  }
+
+  footer {
+    font-size: 0.7rem; /* Reducir tamaño del texto */
+  }
+}
