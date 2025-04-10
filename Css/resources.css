@@ -376,6 +376,7 @@ a {
     grid-column: 1; /* Ocupa toda la fila */
     grid-template-columns: 1fr; /* Una sola columna */
     gap: 0.5rem;
+    height: auto;
   }
 
   .chat-header {
@@ -421,7 +422,6 @@ a {
   .chat-container {
     width: 100%; /* Ocupa todo el ancho disponible */
     padding: 0.5rem;
-    min-height: 250px; /* Reducir altura mínima */
   }
 
   .info-boxes {
