@@ -7,7 +7,7 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         console.log('Usuario autenticado:', user.email);
     } else {
-        window.location.href = 'login.html';
+        window.location.href = '/login/login.html';
     }
 });
 
@@ -60,6 +60,8 @@ const fetchChatResponse = async () => {
 
         const card = document.createElement('div');
         card.classList.add('card');
+        // card.style.width = '100%'; // Ajustar el ancho de la tarjeta
+        // card.style.height = '450px'; // Ajustar la altura de la tarjeta
 
         const title = document.createElement('h4');
         title.textContent = `Consulta: ${query}`;
@@ -154,13 +156,13 @@ const fetchInfoBoxes = async (query) => {
     infoBoxesContainer.innerHTML = ''; // Limpiar resultados anteriores
 
     try {
-        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&key=AIzaSyD7uH83n_xvtgcFQIhTyyXi7ZGtMeOkMwc`);
+        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&key=AIzaSyD5p40hY1ml7gm6Oi3sQs0Qs4Ob7plhT-0`);
         const data = await response.json();
 
 
         if (data.items && Array.isArray(data.items)) {
             // Tomar solo los primeros 2 resultados
-            const videos = data.items.slice(0, 4);
+            const videos = data.items.slice(0, 2);
 
             videos.forEach(item => {
                 if (item.id.kind === "youtube#video") {
@@ -191,7 +193,7 @@ const fetchInfoBoxes = async (query) => {
 
 const fetchResources = () => {
     const query = queryInput.value;
-    fetch(`https://magicloops.dev/api/loop/a0f1f06d-de6c-474c-8ac7-1eb7ae84a880/run?query=${encodeURIComponent(query)}`)
+    fetch(`https://magicloops.dev/api/loop/a0f1f06d-de6c-474c-8ac7-1eb7ae84a880/run?query=${encodeURIComponent(query)}&key=AIzaSyAQDaDyf6uFwcYkvxUL9aZwouRUXnAjOX0`)
         .then(response => response.json())
         .then(data => {
             const infoBoxesContainer = document.querySelector('.info-boxes');
